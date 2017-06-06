@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+body
+{
+    background: black;
+}
+
+canvas
+{
+      background: white;
+			padding: 0;
+			margin: auto;
+			display: block;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+}
+</style>
+</head>
+<body onload="main()">
+  <canvas id="myCanvas" width="1280" height="720">
+
+	</canvas>
+<script>
+
+var background;
+var dialog;
+
+function main()
+{
+    canvas.setThisObj();
+    background = new vision("source/sky.png", 0, 0);
+    dialog = new vision("source/dialog1.png", 650, 680);
+    var timer = setInterval(changeFrame, 20);
+}
+
+function changeFrame()
+{
+    canvas.cleanThisObj();
+    background.generate();
+    dialog.generate();
+}
+
+var canvas = {
+
+    setThisObj : function () {
+        this.obj = document.getElementById("myCanvas").getContext("2d");
+        this.obj.width = document.getElementById("myCanvas").getAttribute("width");
+        this.obj.height = document.getElementById("myCanvas").getAttribute("height");
+    },
+
+    getThisObj : function () {
+        return this.obj;
+    },
+
+    cleanThisObj : function() {
+        this.obj.clearRect(0, 0, this.obj.width, this.obj.height);
+    }
+}
+
+function vision(address, x, y)
+{
+    this.image = new Image();
+    this.image.src = address;
+    this.x = x;
+    this.y = y;
+    this.generate = function(){
+
+      ctx = canvas.getThisObj();
+      ctx.drawImage(this.image,this.x,this.y);
+
+    }
+}
+
+</script>
+
+</body>
+</html>
