@@ -29,15 +29,27 @@ canvas
 <script>
 
 var background;
-var dialog;
+var dialog = [
+
+    "source/dialog1.png",
+    "source/dialog2.png",
+    "source/dialog3.png",
+    "source/dialog4.png",
+    "source/dialog5.png"
+
+];
+
+var x = 0;
 
 function main()
 {
     canvas.setThisObj();
     background = new vision("source/sky.png", 0, 0);
-    dialog = new vision("source/dialog1.png", 650, 680);
+    dialog = new vision(dialog[x], 650, 680);
     var timer = setInterval(changeFrame, 20);
 }
+
+
 
 function changeFrame()
 {
